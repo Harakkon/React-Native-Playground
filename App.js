@@ -1,55 +1,32 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Animated } from 'react-native';
 
-import React from 'react';
+export default class App extends React.Component {
+  state = {
+    isLoading: true
+  };
 
-import navigation from 'react-navigation';
-import gesture from 'react-native-gesture-handler';
-import reanimated from 'react-native-reanimated';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const App: () => React$Node = () => {
-  return (
-    <>
-     <View style={styles.basicViewStyle}>
-        <Text>Engine: Hermes</Text>
-     </View>
-    </>
-  );
-};
+  render() {
+    const { isLoading } = this.state;
+    return (
+      <View style={styles.container}>
+        {isLoading ? (
+          <Text>Fetching The Weather</Text>
+        ) : (
+          <View>
+            <Text>Minimalist Weather App</Text>
+          </View>
+        )}
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  basicViewStyle:{
-    alignItems:'center',
-    alignSelf: 'stretch',
-    justifyContent:'center',
-    paddingLeft:40,
-    paddingRight:40
-  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
-
-export default App;
