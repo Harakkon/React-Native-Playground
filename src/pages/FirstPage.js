@@ -2,15 +2,28 @@ import React, { Component } from 'react';
 import { Text, View,StyleSheet, Animated,Image,ScrollView,RefreshControl,SafeAreaView} from 'react-native';
 import { API_KEY } from '../utils/HelperAPI';
 import  Weather  from '../templates/WeatherContainer';
+import Geolocation from '@react-native-community/geolocation';
 
 
 export default class FirstPage extends Component<{}> {
   state = {
+  	latitude:22,
+  	longitude:22,
     temperature:'0',
     weatherCondition: 'Clear',
     error: null,
-    refreshing: false
+    refreshing: true
   };
+	getCurrentCoords=()=>{
+			Geolocation.getCurrentPosition(position=>{
+				this.setState({latitude: position.coords.latitude,longitude: position.coords.longitude},
+					()=>{this.fetchWeather(
+						this.state.latitude,
+						this.state.longitude);
+					})
+			})
+	}
+
   fetchWeather(lat, lon) {
     fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}&units=metric`).then(res => res.json()).then(json => {
         this.setState({
@@ -22,11 +35,11 @@ export default class FirstPage extends Component<{}> {
     this.setState({refreshing: false});
   	}
   componentDidMount() {
-	this.fetchWeather(15,24);
+  	this.getCurrentCoords()
 	}
 	_onRefresh() {
     this.setState({refreshing: true});
-    this.fetchWeather(12,54);
+    this.fetchWeather(this.state.latitude,this.state.longitude);
   	}
   render() {
     return (
