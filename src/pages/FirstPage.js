@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View,StyleSheet, Animated,Image  } from 'react-native';
 import { API_KEY } from '../utils/HelperAPI';
+import  Weather  from '../templates/WeatherContainer';
 
 
-export default class HelloWorldApp extends Component {
+export default class FirstPage extends Component<{}> {
   state = {
-    temperature: 0,
-    weatherCondition: null,
+    temperature:'0',
+    weatherCondition: 'Clear',
     error: null
   };
   fetchWeather(lat, lon) {
@@ -23,10 +24,7 @@ export default class HelloWorldApp extends Component {
 	}
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text> {this.state.temperature}+{this.state.weatherCondition}</Text>
-        <Image style={{ tintColor:'red' }} source={require('../assets/'+'cloud'+'.png')} />
-      </View>
+    	<Weather weather={this.state.weatherCondition} temperature={this.state.temperature}/>
     );
   }
 }
