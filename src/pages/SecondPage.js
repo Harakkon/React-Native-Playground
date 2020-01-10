@@ -57,7 +57,9 @@ export default class FirstPage extends Component<{}> {
     return (
     	<View>
     	<StatusBar backgroundColor="blue" barStyle="light-content" />
-	    <FlatList data={this.state.data.list} keyExtractor={(x, i) => i} renderItem={({item}) => <Weather weather={item.weather[0].main} temperature={item.main.temp} time={timeConverter(item.dt)} />} />
+	    <FlatList refreshControl={
+          <RefreshControl refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}/>} data={this.state.data.list} keyExtractor={(x, i) => i} renderItem={({item}) => <Weather weather={item.weather[0].main} temperature={item.main.temp} time={timeConverter(item.dt)} />} />
 	    </View>
     );
   }

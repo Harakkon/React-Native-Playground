@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View,StyleSheet, Animated,Image,ScrollView,RefreshControl,SafeAreaView} from 'react-native';
+import { Text, View,StyleSheet, Animated,Image,ScrollView,RefreshControl,StatusBar} from 'react-native';
 import { API_KEY } from '../utils/HelperAPI';
-import  Weather  from '../templates/WeatherContainer';
+import Weather  from '../templates/WeatherContainer';
 import Geolocation from '@react-native-community/geolocation';
-
+import { weatherConditions } from '../utils/WeatherConditions';
 
 export default class FirstPage extends Component<{}> {
   state = {
@@ -42,13 +42,14 @@ export default class FirstPage extends Component<{}> {
     this.fetchWeather(this.state.latitude,this.state.longitude);
   	}
   render() {
-    return (
+    return (     
     	<ScrollView contentContainerStyle={{flexGrow: 1}} refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
             onRefresh={this._onRefresh.bind(this)}
           />
         }>
+      <StatusBar backgroundColor={weatherConditions[this.state.weatherCondition].color}/>
     	<Weather weather={this.state.weatherCondition} temperature={this.state.temperature}/>
     	</ScrollView>
     );

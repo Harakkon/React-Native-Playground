@@ -4,7 +4,6 @@ import { View, Text,TextInput, StyleSheet, Image, Dimensions } from 'react-nativ
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
-
 const { width, height } = Dimensions.get('window');
 
 const {
@@ -54,6 +53,10 @@ function runTiming(clock, value, dest) {
   ]);
 }
 export default class LoginPage extends React.Component  {
+  goToRegister = () => this.props.navigation.navigate('Register')
+  goToMain = () => this.props.navigation.navigate('Main')
+
+
   constructor() {
     super();
 
@@ -157,7 +160,7 @@ export default class LoginPage extends React.Component  {
               <Text style={{ fontSize: 20, fontWeight: 'bold'}}>SIGN IN</Text>
             </Animated.View>
           </TapGestureHandler>
-          <TapGestureHandler onHandlerStateChange={this.onStateRegister}>
+          <TapGestureHandler onHandlerStateChange={this.goToRegister}>
             <Animated.View
               style={{
                 ...styles.button,
@@ -183,9 +186,11 @@ export default class LoginPage extends React.Component  {
               placeholder="PASSWORD"
               style={styles.textInput}
               placeholderTextColor='black'/>
-              <Animated.View style={styles.button}>
-                <Text style={{fontSize:20,fontWeight:'bold'}}>SIGN IN</Text>
-              </Animated.View>
+              <TapGestureHandler onHandlerStateChange={this.goToMain}>
+                <Animated.View style={styles.button}>
+                  <Text style={{fontSize:20,fontWeight:'bold'}}>SIGN IN</Text>
+                </Animated.View>
+              </TapGestureHandler>
           </Animated.View>
         </View>
       </View>

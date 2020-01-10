@@ -1,32 +1,8 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Animated } from 'react-native';
+import React from 'react';
+import AppNavigator from './src/navigation/AppNavigation'
 
-export default class App extends React.Component {
-  state = {
-    isLoading: true
-  };
-
-  render() {
-    const { isLoading } = this.state;
-    return (
-      <View style={styles.container}>
-        {isLoading ? (
-          <Text>Fetching The Weather</Text>
-        ) : (
-          <View>
-            <Text>Minimalist Weather App</Text>
-          </View>
-        )}
-      </View>
-    );
-  }
+export default function App() {
+  return (
+    <AppNavigator /> 
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
